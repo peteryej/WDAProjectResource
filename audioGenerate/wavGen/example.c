@@ -42,16 +42,15 @@ int main()
 	short waveform[num_samples];
 	// https://pages.mtu.edu/~suits/notefreqs.html has the pitch frequencies
 	double frequency1 = 261.63; //pitch C4
-	double frequency2 = 523.25; //130.81; //pitch C3
-	//double frequency3 = 523.25; //pitch C5
+	double frequency2 = 523.25; //pitch C3
+
 
 
 	generateFrequency(waveform, num_sample1, 0, frequency1);
 	generateFrequency(waveform, num_sample2, num_sample1, frequency2);
-	//generateFrequency(waveform, num_sample3, num_sample1+num_sample2, frequency3);
 
 
-	FILE * f = wavfile_open("3Csound.wav");
+	FILE * f = wavfile_open("sound.wav");
 	if(!f) {
 		printf("couldn't open sound.wav for writing: %s",strerror(errno));
 		return 1;
