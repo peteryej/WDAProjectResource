@@ -6,6 +6,11 @@ Go to your desired folder that you want to put the project directory, then run t
 `git clone https://github.com/peteryej/WDAProjectResource.git`
 
 
+There is a lab station with speaker and microphone connected to PowerDues. We will have more of the station setup next week. 
+
+Check back often for update of code and more resources. You can run `git pull` in your directory to receive the updates.
+
+
 ## Three ways to generate audio
 ### 1. Use PowerDue to generate audio
 Under audioGenerate/audioOutPowerDue folder, it uses WM8731_Audio library to generate a single frequency output. 
