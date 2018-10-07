@@ -1,0 +1,8 @@
+# Audio FFT Processing
+
+The Arduino code uses the WM8731 library to control the codec and get the audio samples values from ADC into a buffer. You MUST NOT change the FFT sample size and the sampling rate as defined near the top of the file, as the `const uint16_t SAMPLES and const double SAMP_FREC`. Current code prints out the highest peak frequency presented in the audio. This is not enough, because we want at least top two frequencies presented, you need to modify the FFT library code as needed. The library code can be normally found in the Arduino/libraries folder, and the Arduino folder can be found under Preferences->Sketchbook location setting.
+
+You can modify other parts of the code. For example, you may want to print out the data got from the codec and plot them, which is provided in the setup section. You may also want to print out the FFT frequency output and plot it, which is provided by the `PrintVector(vReal, (SAMPLES >> 1), SCL_FREQUENCY);` function. Currently the buffer is set up to collect data from the codec after about 7ms and only collect once. There is a delay interval between each buffer fillment. You can modify the delay and continuous collection behavior. This can be found in the `DMAC_Handler(void)` function in the WM8731_AudioMod.cpp file. More specifically, change the delayInterval and counter values in the if conditional statements.
+
+You are encoraged to explore the examples provided by the Arduino FFT library. You can set the frequency and the artificial sine wave will be genrated and then run the FFT on the generated data to get the result and get an idea of whether the FFT works as expected. 
+

@@ -1,13 +1,19 @@
 # Audio processing for WDA semester project
 
+## Setup
+Go to your desired folder that you want to put the project directory, then run the below commands in a terminal.
+
+`git clone https://github.com/peteryej/WDAProjectResource.git`
+
+
 ## Three ways to generate audio
-### Use PowerDue to generate audio
+### 1. Use PowerDue to generate audio
 Under audioGenerate/audioOutPowerDue folder, it uses WM8731_Audio library to generate a single frequency output. 
 
-### Generate sound on computer with wav file
+### 2. Generate sound on computer with wav file
 Under audioGenerate/wavGen folder, it uses its own wavfile library to generate a wav file.
 
-### Use GNU Radio to generate sound on computer
+### 3. Use GNU Radio to generate sound on computer
 Under audioGenerate/GNURadioGenerate folder, it uses GNU Radio to generate sound on computer. You can test it out on your computer with the virutal machine setup mentioned in the pre-lab section of lab 2. 
 
 

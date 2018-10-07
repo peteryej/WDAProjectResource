@@ -84,7 +84,7 @@ void loop()
   elapsedTime = millis() - prevTime;
 
   //SerialUSB.println("Computed magnitudes:");
-  PrintVector(vReal, (SAMPLES >> 1), SCL_FREQUENCY);
+  //PrintVector(vReal, (SAMPLES >> 1), SCL_FREQUENCY);
   
   SerialUSB.print("frequency: ");
   SerialUSB.println(x, 6);

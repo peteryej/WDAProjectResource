@@ -2,7 +2,6 @@
 #include <WM8731_Audio.h>
 
 float curFreq = 2000.0;
-bool ascending = true;
 
 
 void setup(void) {
@@ -14,7 +13,6 @@ void setup(void) {
   digitalWrite(7,LOW);
   digitalWrite(8,LOW);
 
-  SerialUSB.begin(115200);
 
   Codec.begin();
   Codec.setOutputVolume(110); // 0 - 127
