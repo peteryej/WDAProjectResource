@@ -80,18 +80,24 @@ void loop()
   //PrintVector(vImag, SAMPLES, SCL_INDEX);
   FFT.ComplexToMagnitude(vReal, vImag, SAMPLES); /* Compute magnitudes */
 
-  double x = FFT.MajorPeak(vReal, SAMPLES, SAMP_FREC);
+  double maxFreq = FFT.MajorPeak(vReal, SAMPLES, SAMP_FREC);
+  double SecondMaxFreq = FFT.SecondMajorPeak(vReal, SAMPLES, SAMP_FREC);
+  
+  
   elapsedTime = millis() - prevTime;
 
   //SerialUSB.println("Computed magnitudes:");
   //PrintVector(vReal, (SAMPLES >> 1), SCL_FREQUENCY);
   
-  SerialUSB.print("frequency: ");
-  SerialUSB.println(x, 6);
+  SerialUSB.print("max frequency: ");
+  SerialUSB.println(maxFreq, 6);
+  SerialUSB.print("second max frequency: ");
+  Serial.println(SecondMaxFreq, 6);
+  
   SerialUSB.print("elapsedTime: ");
   SerialUSB.println(elapsedTime);
   
-  while(1); /* Run Once */
+  //while(1); /* Run Once */
   delay(2000); /* Repeat after delay */
 
 }
