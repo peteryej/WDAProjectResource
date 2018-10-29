@@ -4,18 +4,22 @@
 #include <PowerDueWiFi.h>
 
 // update these
-#define WIFI_SSID "PowerDue"
-#define WIFI_PASS "powerdue"
+//#define WIFI_SSID "PowerDue"
+//#define WIFI_PASS "powerdue"
+
+#define WIFI_SSID "lopy-wlan-8b72"
+#define WIFI_PASS "www.pycom.io"
 
 #define SERVER_PORT 9999
-#define SERVER_IP "10.230.12.76"
+//#define SERVER_IP "10.230.12.76"
+#define SERVER_IP "192.168.4.3"
 
 /*------------------------------------------------------------*/
 
 #define DATALEN 100
 char buf[DATALEN];
 
-char answer[DATALEN] = "answer: 110, 220";  //change to be your answers to send
+char answer[DATALEN] = "team: teamName; answer: 110, 220";  //change to be your answers to send
 
 void prepareBuffer(char answer[]){
   strcpy(buf, answer);
