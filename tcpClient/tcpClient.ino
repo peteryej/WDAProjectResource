@@ -4,15 +4,19 @@
 #include <PowerDueWiFi.h>
 
 // update these
-//#define WIFI_SSID "PowerDue"
-//#define WIFI_PASS "powerdue"
+#define WIFI_SSID "PowerDue"
+#define WIFI_PASS "powerdue"
 
-#define WIFI_SSID "lopy-wlan-8b72"
-#define WIFI_PASS "www.pycom.io"
+//#define WIFI_SSID "lopy-wlan-8b72"
+//#define WIFI_PASS "www.pycom.io"
 
 #define SERVER_PORT 9999
-//#define SERVER_IP "10.230.12.76"
-#define SERVER_IP "192.168.4.3"
+// for testing on your own, change the ip to the computer that you run the tcpServer.
+// Make sure your computer is connected to the Powerdue wifi, then find out the ip of
+// your computer by using ifconfig command on Mac/Linux
+#define SERVER_IP "10.230.12.76" 
+
+//#define SERVER_IP "192.168.4.3"
 
 /*------------------------------------------------------------*/
 
