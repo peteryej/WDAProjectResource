@@ -1,5 +1,26 @@
 # Audio processing for WDA semester project
 
+## Attention on Your Code Structure
+1. Make sure you have the below code in the beginning of your setup on the transmission side.
+```
+  initLEDs();
+  SerialUSB.begin(0);
+  while(!SerialUSB);
+  turnOnLEDs();
+```
+`initLEDs()` sets up the LED pins and turn them off. 
+
+`SerialUSB.begin(0);` sets up the SerailUSB. 
+
+`while(!SerialUSB);` waits for openning the serail port which is used to start the energy measurement.
+
+`turnOnLEDs();` gives a visual signal that the program starts. 
+
+2. Your receiving side should be not depend on the server side to turn on. This eliminates the communication back and forth during the competition. Your receiving side should be just trun on and then waits for correct LoRa message and then send it to the tcp server and it repeats the process. The details can be found in the tcpClient folder instruction.
+
+3. Board 10 has wifi issues, so don't use it on the receiving side, since it may not be able to connect to the wifi network. 
+
+
 ## Setup
 Go to your desired folder that you want to put the project directory, then run the below commands in a terminal.
 

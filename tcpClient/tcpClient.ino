@@ -45,18 +45,14 @@ void tcpClient(void * argument)
 
   while(lwip_connect(s, (struct sockaddr *)&serverAddr, sizeof(serverAddr))){
     SerialUSB.println("Failed to connect to server. Retrying...");
-    //assert(false);
-    delay(1000);
+    delay(500);
   }
   SerialUSB.println("Connected to server");
   prepareBuffer(answer);
 
   // send data  
   if (lwip_write(s, buf, DATALEN)){
-    turnOnLEDs();
-    delay(500);
     SerialUSB.println("sent");
-    turnOffLEDs();
   }else{
     SerialUSB.println("failed to send");
   }
@@ -64,7 +60,7 @@ void tcpClient(void * argument)
   // close socket after everything is done
   lwip_close(s);
   SerialUSB.println("socket closed");
-  vTaskSuspend( NULL );
+  //vTaskDelete( NULL );
 }
 
 /*------------------------------------------------------------*/
