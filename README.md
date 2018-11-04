@@ -16,7 +16,7 @@
 
 `turnOnLEDs();` gives a visual signal that the program starts. 
 
-2. Your receiving side should be not depend on the server side to turn on. This eliminates the communication back and forth during the competition. Your receiving side should be just trun on and then waits for correct LoRa message and then send it to the tcp server and it repeats the process. The details can be found in the tcpClient folder instruction.
+2. Your receiving side should be not depend on the server side to turn on. This eliminates the communication back and forth during the competition. Your receiving side should just turn on and then waits for correct LoRa message and then sends it to the tcp server, and it repeats the process. The details can be found in the tcpClient folder instruction.
 
 3. Board 10 has wifi issues, so don't use it on the receiving side, since it may not be able to connect to the wifi network. 
 
