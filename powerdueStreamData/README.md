@@ -12,7 +12,7 @@ You can choose to start one powerdue or two powerdues. For starting only one pow
 
 At the end of the 25 seconds, the energy consumption is printed out. One note on the processor energy consumption calculation is that it ignores voltage level values below 100 mV to account for the difference in boards shutdown voltage level, so it only calculates energy when the processor is awake.
 
-One example output is shown below ![example](https://github.com/peteryej/WDAProjectResource/tree/master/powerdueStreamData/exampleOutput.png).
+One example output is shown below ![example](https://github.com/peteryej/WDAProjectResource/blob/labtest/powerdueStreamData/exampleOutput.png).
 
 
 ## visualize energy consumption
