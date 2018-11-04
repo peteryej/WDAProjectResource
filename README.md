@@ -10,7 +10,7 @@
 ```
 `initLEDs()` sets up the LED pins and turn them off. 
 
-`SerialUSB.begin(0);` sets up the SerailUSB. 
+`SerialUSB.begin(0);` sets up the SerialUSB. 
 
 `while(!SerialUSB);` waits for openning the serail port which is used to start the energy measurement.
 
