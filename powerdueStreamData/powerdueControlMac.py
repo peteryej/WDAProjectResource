@@ -12,7 +12,10 @@ def openSerialPort(serialStr, fName):
     print serialStr
     if serialStr != "":
         charList = list(serialStr)
-        charList[-2] = '1' if charList[-2] == '3' else '3'
+        if charList[-2] != '0':
+            charList[-2] = '1' if charList[-2] == '3' else '3'
+        else:
+            charList[-3] = '1' if charList[-3] == '3' else '3'
         targetPort = "".join(charList)
         target = serial.Serial(port=targetPort, timeout=10000, baudrate=96000)
         s = serial.Serial(port=serialStr, timeout=10000, baudrate=8000000)
