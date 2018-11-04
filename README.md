@@ -8,7 +8,7 @@
   while(!SerialUSB);
   turnOnLEDs();
 ```
-`initLEDs()` sets up the LED pins and turn them off. 
+`initLEDs()` sets up the LED pins and turns them off. 
 
 `SerialUSB.begin(0);` sets up the SerialUSB. 
 
