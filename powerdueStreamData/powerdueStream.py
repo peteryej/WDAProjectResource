@@ -1,4 +1,4 @@
-import pyqtgraph as pg
+#import pyqtgraph as pg
 import time, threading, sys
 import serial
 from time import sleep
@@ -24,6 +24,8 @@ SYNC_BLOCK_LENGTH = 4
 
 STATE_SYNC = 0
 STATE_READING = 1
+
+FILE_PATH = '/home/wdauser/Desktop/testOutput/'
 
 class PowerDue(threading.Thread):
     """ Defines a thread for reading and buffering serial data.
@@ -77,7 +79,7 @@ class PowerDue(threading.Thread):
         port = self.port
         count = 0
         sps = None
-        lastUpdate = pg.ptime.time()
+        #lastUpdate = pg.ptime.time()
         tmpData = np.zeros((NCHAN + 1, self.chunkSize), dtype = np.uint16)
         print tmpData.shape
         #self.startCommand()
@@ -139,20 +141,12 @@ class PowerDue(threading.Thread):
                 # convert data to 16bit int numpy array
                 readData = np.fromstring(actualdata, dtype=np.uint16)
 
-                #print readData.shape
 
-            #readData = np.arange(0, self.chunkSize*NCHAN)
             for _chan in range(0, NCHAN):
                 # Subsample. Start:stop:step
-                #print self.chunkSize - NCHAN + _chan + 1
-                #print readData[_chan:self.chunkSize - NCHAN + _chan + 1:4]
-
-                #tmpData[_chan, 0:num_samples] = ((readData[_chan:readData.size:4]).copy() & 0x0FFF)
                 tmpData[_chan, 0:num_samples] = ((readData[_chan:readData.size:8]).copy() & 0x0FFF)
 
 
-            # Write Task IDs to buffer as well
-            #tmpData[NCHAN,0:num_samples] = task_id * np.ones((1, num_samples))
 
             # write the new chunk into the circular buffer
             # and update the buffer pointer
@@ -182,10 +176,10 @@ class PowerDue(threading.Thread):
         tVals, dataVals = self.downSampleAndOutput()
         output = np.vstack([tVals, dataVals])
         output = np.transpose(output)
-        np.savetxt("/Users/peteryej/Desktop/"+self.fName, output, fmt="%10.6f", delimiter=",", header = header, comments = '')
+        np.savetxt(FILE_PATH+self.fName, output, fmt="%10.6f", delimiter=",", header = header, comments = '')
         self.duration = end - start
         print('duration: ' + str(self.duration))
-        print('data saved as /Users/peteryej/Desktop/'+self.fName)
+        print('data saved as '+FILE_PATH+self.fName)
         self.calcEnergy(output)
         self.exit()
 
@@ -210,14 +204,8 @@ class PowerDue(threading.Thread):
         ProcessorCol = output[:,4]
         RadioCol = output[:,3]
         ProcessorTotal = np.sum(ProcessorCol[np.where(ProcessorCol>.1)])
-        #RadioTotal = np.sum(RadioCol[np.where(RadioCol>.1)])
         RadioTotal = np.sum(RadioCol)
 
-        # Processorenergy = totalRaw[4]*3.3/25/1.33*delta   
-        # print("Processor total energy: {0:.5f} J".format(Processorenergy))
-        # Radioenergy = totalRaw[3]*3.3/25/.4*delta   
-        # print("Radio total energy: {0:.5f} J".format(Radioenergy))
-        # print("Total total energy: {0:.5f} J".format(Radioenergy+Processorenergy))
 
         Processorenergy = ProcessorTotal*3.3/25/1.33*delta   
         print(self.fName+" Processor energy: {0:.5f} J".format(Processorenergy))
