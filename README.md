@@ -10,6 +10,8 @@ There is a lab station with speaker and microphone connected to PowerDues. We wi
 
 Check back often for update of code and more resources. You can run `git pull` in your directory to receive the updates.
 
+## Get your energy consumption and time
+The processor and LoRa transmission energy is measured during a 25-second interval. The time is measured from when the energy measurement starts to when the tcpServer receives the answer. The instruction on how to test and get the result is in the powerdueStreamData folder.
 
 ## Three ways to generate audio
 ### 1. Use PowerDue to generate audio
