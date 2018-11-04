@@ -1,7 +1,7 @@
 
 ## run test
 
-`python powerdueControl.py` for Linux/Windows machine. For Mac, `python powerdueControlMac.py`. The port number has different format on the two versions. On Mac it's a 5 digit number like 14111, 14131 etc. On Linux/Windows, it's like ACM0 or ACM1. You only need to enter the digit for either version.
+`python powerdueControl.py` for Linux/Windows machine. For Mac, `python powerdueControlMac.py`. The port number has different format on the two versions. On Mac it's a 5 digit number like 14111, 14131 etc. On Linux/Windows, it's like ACM0 or ACM1. You only need to enter the digit for either version. Then open `powerdueStream.py` and make sure the `FILE_PATH` exists and you can change to where you want to put the file.
 
 
 Then follow the prompt to enter the port number of the instrument port. The instrument port can be found using the Arduino IDE to identify which is the instrument and which is the target.
