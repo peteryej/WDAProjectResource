@@ -4,7 +4,7 @@
 `python powerdueControl.py` 
 
 
-Then follow the prompt to enter the port number of the instrument port. 
+Then follow the prompt to enter the port number of the instrument port. The instrument port can be found using the Arduino IDE to identify which is the instrument and which is the target.
 
 Then enter the csv file name if you don't want to default name, and it will be saved in the testOutput on Desktop.
 
