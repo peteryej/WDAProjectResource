@@ -4,8 +4,11 @@
 #include <PowerDueWiFi.h>
 
 // update these
-#define WIFI_SSID "PowerDue"
-#define WIFI_PASS "powerdue"
+//#define WIFI_SSID "PowerDue"
+//#define WIFI_PASS "powerdue"
+
+#define WIFI_SSID "CROSSMobile"
+#define WIFI_PASS "18747wda"
 
 //#define WIFI_SSID "lopy-wlan-8b72"
 //#define WIFI_PASS "www.pycom.io"
@@ -14,8 +17,9 @@
 // for testing on your own, change the ip to the computer that you run the tcpServer.
 // Make sure your computer is connected to the Powerdue wifi, then find out the ip of
 // your computer by using ifconfig command on Mac/Linux
-#define SERVER_IP "10.230.12.76" 
 
+#define SERVER_IP "10.240.12.55" 
+//#define SERVER_IP "172.29.93.96" 
 //#define SERVER_IP "192.168.4.3"
 
 /*------------------------------------------------------------*/
@@ -44,8 +48,11 @@ void tcpClient(void * argument)
   int s = lwip_socket(AF_INET, SOCK_STREAM, 0);
 
   while(lwip_connect(s, (struct sockaddr *)&serverAddr, sizeof(serverAddr))){
+    lwip_close(s);
     SerialUSB.println("Failed to connect to server. Retrying...");
+    s = lwip_socket(AF_INET, SOCK_STREAM, 0);
     delay(500);
+    
   }
   SerialUSB.println("Connected to server");
   prepareBuffer(answer);
@@ -60,7 +67,7 @@ void tcpClient(void * argument)
   // close socket after everything is done
   lwip_close(s);
   SerialUSB.println("socket closed");
-  //vTaskDelete( NULL );
+  vTaskDelete( NULL );
 }
 
 /*------------------------------------------------------------*/
