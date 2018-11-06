@@ -4,11 +4,11 @@
 #include <PowerDueWiFi.h>
 
 // update these
-//#define WIFI_SSID "PowerDue"
-//#define WIFI_PASS "powerdue"
+#define WIFI_SSID "PowerDue"
+#define WIFI_PASS "powerdue"
 
-#define WIFI_SSID "CROSSMobile"
-#define WIFI_PASS "18747wda"
+//#define WIFI_SSID "CROSSMobile"
+//#define WIFI_PASS "18747wda"
 
 //#define WIFI_SSID "lopy-wlan-8b72"
 //#define WIFI_PASS "www.pycom.io"
@@ -18,8 +18,8 @@
 // Make sure your computer is connected to the Powerdue wifi, then find out the ip of
 // your computer by using ifconfig command on Mac/Linux
 
-#define SERVER_IP "10.240.12.55" 
-//#define SERVER_IP "172.29.93.96" 
+//#define SERVER_IP "10.240.12.55" 
+#define SERVER_IP "172.29.93.96" 
 //#define SERVER_IP "192.168.4.3"
 
 /*------------------------------------------------------------*/

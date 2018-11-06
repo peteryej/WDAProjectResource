@@ -25,6 +25,7 @@ def openSerialPort(serialStr, fName):
             return None 
         targetPort = "".join(charList)
         target = serial.Serial(port=targetPort, timeout=10000, baudrate=96000)
+        discard = target.read(12)
         s = serial.Serial(port=serialStr, timeout=10000, baudrate=8000000)
         powerdueThread = PowerDue(s, fName=fName, debug=False)
         powerdueThread.start()
