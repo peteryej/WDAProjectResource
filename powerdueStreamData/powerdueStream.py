@@ -25,7 +25,7 @@ SYNC_BLOCK_LENGTH = 4
 STATE_SYNC = 0
 STATE_READING = 1
 
-FILE_PATH = '/home/wdauser/Desktop/testOutput/'
+FILE_PATH = '/home/peter/Desktop/testOutput/'
 
 class PowerDue(threading.Thread):
     """ Defines a thread for reading and buffering serial data.
