@@ -4,21 +4,30 @@
 1. Make sure you have the below code in the beginning of your setup on the transmission side.
 ```
   initLEDs();
-  SerialUSB.begin(0);
   while(!SerialUSB);
+  SerialUSB.begin(9600);
   turnOnLEDs();
 ```
 `initLEDs()` sets up the LED pins and turns them off. 
 
-`SerialUSB.begin(0);` sets up the SerialUSB. 
-
 `while(!SerialUSB);` waits for openning the serail port which is used to start the energy measurement.
+
+`SerialUSB.begin(9600);` sets up the SerialUSB. 
 
 `turnOnLEDs();` gives a visual signal that the program starts. 
 
-2. Your receiving side should be not depend on the server side to turn on. This eliminates the communication back and forth during the competition. Your receiving side should just turn on and then waits for correct LoRa message and then sends it to the tcp server, and it repeats the process. The details can be found in the tcpClient folder instruction.
+2. On the receiving side make sure you follow the code in the receivingTemplate folder. Your receiving side should be not depend on the server side to turn on. This eliminates the communication back and forth during the competition. Your receiving side should just turn on and then waits for correct LoRa message and then sends it to the tcp server, and it repeats the process. 
 
-3. Board 10 has wifi issues, so don't use it on the receiving side, since it may not be able to connect to the wifi network. 
+3. Board 10 has wifi issues, so don't use it on the receiving side, since it may not be able to connect to the wifi network. Board 11 LoRa has issues that `LoRa.begin(FREQUENCY)` doesn't work consistently, it may be due to the use of SPI chip.
+
+## Test on the lab laptop
+There are two laptops setup in the lab. The one in the inner corner is setup to upload code to the transmission side, and the outer laptop is setup to upload code to the receiving side. We keep it the same as how the competition will use. 
+
+To test your code on the laptop, there are a few ways to transfer your code to the laptop. 
+1. You can upload the code to google drive then download it on the laptop. 
+2. Download the [id_rsa_lablaptop](https://canvas.cmu.edu/courses/5895/files/3082952?module_item_id=902229) file from canvas which can be found under the semester project section to your computer, then `cd ` into to where the file is downloaded and run the command in a terminal `ssh-add id_rsa_lablaptop`. To transfer file to the lab laptop desktop from your computer, run `scp path/to/file peter@172.29.93.49:~/Desktop/` change the `path/to/file` to the actual file location on your computer.
+3. Use a USB flash drive. 
+
 
 
 ## Setup
@@ -26,26 +35,12 @@ Go to your desired folder that you want to put the project directory, then run t
 
 `git clone https://github.com/peteryej/WDAProjectResource.git`
 
+`git checkout twolabsetups`
 
-There is a lab station with speaker and microphone connected to PowerDues. We will have more of the station setup next week. 
-
-Check back often for update of code and more resources. You can run `git pull` in your directory to receive the updates.
 
 ## Get your energy consumption and time
 The processor and LoRa transmission energy is measured during a 25-second interval. The time is measured from when the energy measurement starts to when the tcpServer receives the answer. The instruction on how to test and get the result is in the powerdueStreamData folder.
 
-## Three ways to generate audio
-### 1. Use PowerDue to generate audio
-Under audioGenerate/audioOutPowerDue folder, it uses WM8731_Audio library to generate a single frequency output. 
-
-### 2. Generate sound on computer with wav file
-Under audioGenerate/wavGen folder, it uses its own wavfile library to generate a wav file.
-
-### 3. Use GNU Radio to generate sound on computer
-Under audioGenerate/GNURadioGenerate folder, it uses GNU Radio to generate sound on computer. You can test it out on your computer with the virutal machine setup mentioned in the pre-lab section of lab 2. 
 
 
-
-## Use FFT to get the frequency information from the microphone
-In the audioInput folder, in oder to run the the Arduino file, you need to download the FFT library first. Go to the Arduino library manager, which is under Sketch-\>Include Library, you can search "fft" and install the "arduinoFFT by kosme" library as shown in the piture below.![picture](https://github.com/peteryej/WDASemesterProj/blob/master/arduinoLibrary.jpg) 
 

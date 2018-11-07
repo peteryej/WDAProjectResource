@@ -18,7 +18,7 @@ def openSerialPort(serialStr, fName):
             charList[-3] = '1' if charList[-3] == '3' else '3'
         targetPort = "".join(charList)
         target = serial.Serial(port=targetPort, timeout=10000, baudrate=9600)
-        discard = target.read(12)
+        #discard = target.read(12)
         s = serial.Serial(port=serialStr, timeout=10000, baudrate=8000000)
         powerdueThread = PowerDue(s, fName=fName, debug=False)
         powerdueThread.start()
