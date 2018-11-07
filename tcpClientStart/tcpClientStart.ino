@@ -1,4 +1,4 @@
-#include <assert.h>
+//#include <assert.h>
 #include <FreeRTOS_ARM.h>
 #include <IPAddress.h>
 #include <PowerDueWiFi.h>
@@ -9,26 +9,17 @@
 
 
 #define SERVER_PORT 9999
-// for testing on your own, change the ip to the computer that you run the tcpServer.
-// Make sure your computer is connected to the Powerdue wifi, then find out the ip of
-// your computer by using ifconfig command on Mac/Linux
 
-//#define SERVER_IP "10.240.12.55" 
 #define SERVER_IP "172.29.93.49" 
 
 /*------------------------------------------------------------*/
 
-#define DATALEN 100
-char buf[DATALEN];
 
-char answer[DATALEN] = "team: teamName; answer: 110, 220";  //change to be your answers to send
-
-void prepareBuffer(char answer[]){
-  strcpy(buf, answer);
-}
 
 void tcpClient(void * argument)
 {  
+  char buf[20];
+
   struct sockaddr_in serverAddr;  
   socklen_t socklen;
   memset(&serverAddr, 0, sizeof(serverAddr));
@@ -45,23 +36,27 @@ void tcpClient(void * argument)
     lwip_close(s);
     SerialUSB.println("Failed to connect to server. Retrying...");
     s = lwip_socket(AF_INET, SOCK_STREAM, 0);
-    delay(500);
+    delay(1000);
     
   }
   SerialUSB.println("Connected to server");
-  prepareBuffer(answer);
-
-  // send data  
-  if (lwip_write(s, buf, DATALEN)){
-    SerialUSB.println("sent");
-  }else{
-    SerialUSB.println("failed to send");
-  }
   
+
+  int n = lwip_read(s, buf, 20);  //blocks when no signal is received
+  SerialUSB.print("received: ");
+  SerialUSB.println(buf);  
+
   // close socket after everything is done
   lwip_close(s);
   SerialUSB.println("socket closed");
+
+  //<------ Start your function here -------->
+//  turnOffLEDs();  // dummy code
+//  delay(200);
+
+
   vTaskDelete( NULL );
+
 }
 
 /*------------------------------------------------------------*/
@@ -100,10 +95,11 @@ void onReady(){
 }
 
 void setup() {
-  SerialUSB.begin(0);
-  while(!SerialUSB);
-
   initLEDs();
+  while(!SerialUSB);
+  SerialUSB.begin(0);
+  turnOnLEDs();
+  
 
   PowerDueWiFi.init(WIFI_SSID, WIFI_PASS);
   PowerDueWiFi.setCallbacks(onReady, onError);
