@@ -24,8 +24,11 @@ def openSerialPort(serialStr, fName):
             print('wrong serial port detected')
             return None 
         targetPort = "".join(charList)
-        target = serial.Serial(port=targetPort, timeout=10000, baudrate=96000)
-        #discard = target.read(12)
+        target = serial.Serial(port=targetPort, timeout=10000, baudrate=9600)
+        try:
+            discard = target.read(0)
+        finally:
+            target.close()
         s = serial.Serial(port=serialStr, timeout=10000, baudrate=8000000)
         powerdueThread = PowerDue(s, fName=fName, debug=False)
         powerdueThread.start()

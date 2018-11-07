@@ -23,7 +23,27 @@
 ## Test on the lab laptop
 There are two laptops setup in the lab. The one in the inner corner is setup to upload code to the transmission side, and the outer laptop is setup to upload code to the receiving side. We keep it the same as how the competition will use. 
 
-To test your code on the laptop, there are a few ways to transfer your code to the laptop. 
+It's necessary to test your code on the lab laptop because it will be the setup of the competition. There are a few things that can affect depending on the test machine. 
+- The audio is run by GNURadio and through the headphone wire, so your code need to make sure that you can get the correct frequencies with this setup. 
+- The tcp server is running on the computer, so make sure your tcp client can connect to the server. 
+
+1. Upload you code to the powerdue board, then connect to the lab laptop.
+2. Go to tcpServer folder and run
+```
+python2env
+python newtcpServer.py
+```
+2. Go to singleTansmisster or doubleTransmitter folder depending on whether you are testing on transmitter or two at the same time.
+3. Run 
+```
+python2env
+# if run single transmitter
+python powerdueControl.py team1 try1
+# if run two transmitter2
+python powerdueControl.py team1 team2 try1
+```
+
+There are a few ways to transfer your code to the laptop, if you want to edit on the lab laptop.
 1. You can upload the code to google drive then download it on the laptop. 
 2. Download the [id_rsa_lablaptop](https://canvas.cmu.edu/courses/5895/files/3082952?module_item_id=902229) file from canvas which can be found under the semester project section to your computer, then `cd ` into to where the file is downloaded and run the command in a terminal `ssh-add id_rsa_lablaptop`. To transfer file to the lab laptop desktop from your computer, run `scp path/to/file peter@172.29.93.49:~/Desktop/` change the `path/to/file` to the actual file location on your computer.
 3. Use a USB flash drive. 
