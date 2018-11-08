@@ -4,8 +4,8 @@
 1. Make sure you have the below code in the beginning of your setup on the transmission side.
 ```
   initLEDs();
-  while(!SerialUSB);
   SerialUSB.begin(115200);
+  while(!SerialUSB);
   turnOnLEDs();
   SerialUSB.println("started");
 ```
