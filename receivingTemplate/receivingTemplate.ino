@@ -120,8 +120,8 @@ void onReady(){
 
 void setup() {
   initLEDs();
-  //while(!SerialUSB);
-  SerialUSB.begin(0);
+  SerialUSB.begin(115200);
+  while(!SerialUSB); // on you serial monitor to make sure that you connected to the server
   turnOnLEDs();
   
   PowerDueWiFi.init(WIFI_SSID, WIFI_PASS);

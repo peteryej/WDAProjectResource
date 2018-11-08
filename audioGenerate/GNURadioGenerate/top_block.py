@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Wed Nov  7 16:28:29 2018
+# Generated: Thu Nov  8 01:42:39 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -75,6 +75,29 @@ class top_block(grc_wxgui.top_block_gui):
         	proportion=1,
         )
         self.Add(_Noise_sizer)
+        _Loudness1_sizer = wx.BoxSizer(wx.VERTICAL)
+        self._Loudness1_text_box = forms.text_box(
+        	parent=self.GetWin(),
+        	sizer=_Loudness1_sizer,
+        	value=self.Loudness1,
+        	callback=self.set_Loudness1,
+        	label="Loudness",
+        	converter=forms.float_converter(),
+        	proportion=0,
+        )
+        self._Loudness1_slider = forms.slider(
+        	parent=self.GetWin(),
+        	sizer=_Loudness1_sizer,
+        	value=self.Loudness1,
+        	callback=self.set_Loudness1,
+        	minimum=0.0,
+        	maximum=1.0,
+        	num_steps=1000,
+        	style=wx.SL_HORIZONTAL,
+        	cast=float,
+        	proportion=1,
+        )
+        self.Add(_Loudness1_sizer)
         _Loudness_sizer = wx.BoxSizer(wx.VERTICAL)
         self._Loudness_text_box = forms.text_box(
         	parent=self.GetWin(),
@@ -104,7 +127,7 @@ class top_block(grc_wxgui.top_block_gui):
         	sizer=_Frequency1_sizer,
         	value=self.Frequency1,
         	callback=self.set_Frequency1,
-        	label="Frequency1",
+        	label="Frequency",
         	converter=forms.int_converter(),
         	proportion=0,
         )
@@ -163,32 +186,9 @@ class top_block(grc_wxgui.top_block_gui):
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
         self.blocks_add_xx_0 = blocks.add_vcc(1)
         self.audio_sink_0 = audio.sink(samp_rate, "", True)
-        self.analog_sig_source_x_0_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, Frequency1, Loudness, 0)
+        self.analog_sig_source_x_0_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, Frequency1, Loudness1, 0)
         self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, Frequency, Loudness, 0)
         self.analog_noise_source_x_0 = analog.noise_source_c(analog.GR_GAUSSIAN, Noise, 0)
-        _Loudness1_sizer = wx.BoxSizer(wx.VERTICAL)
-        self._Loudness1_text_box = forms.text_box(
-        	parent=self.GetWin(),
-        	sizer=_Loudness1_sizer,
-        	value=self.Loudness1,
-        	callback=self.set_Loudness1,
-        	label="Loudness1",
-        	converter=forms.float_converter(),
-        	proportion=0,
-        )
-        self._Loudness1_slider = forms.slider(
-        	parent=self.GetWin(),
-        	sizer=_Loudness1_sizer,
-        	value=self.Loudness1,
-        	callback=self.set_Loudness1,
-        	minimum=0.0,
-        	maximum=1.0,
-        	num_steps=1000,
-        	style=wx.SL_HORIZONTAL,
-        	cast=float,
-        	proportion=1,
-        )
-        self.Add(_Loudness1_sizer)
 
         ##################################################
         # Connections
@@ -205,8 +205,8 @@ class top_block(grc_wxgui.top_block_gui):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.analog_sig_source_x_0_0.set_sampling_freq(self.samp_rate)
         self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
+        self.analog_sig_source_x_0_0.set_sampling_freq(self.samp_rate)
         self.wxgui_fftsink2_0.set_sample_rate(self.samp_rate)
 
     def get_Noise(self):
@@ -214,9 +214,9 @@ class top_block(grc_wxgui.top_block_gui):
 
     def set_Noise(self, Noise):
         self.Noise = Noise
+        self.analog_noise_source_x_0.set_amplitude(self.Noise)
         self._Noise_slider.set_value(self.Noise)
         self._Noise_text_box.set_value(self.Noise)
-        self.analog_noise_source_x_0.set_amplitude(self.Noise)
 
     def get_Loudness1(self):
         return self.Loudness1
@@ -225,6 +225,7 @@ class top_block(grc_wxgui.top_block_gui):
         self.Loudness1 = Loudness1
         self._Loudness1_slider.set_value(self.Loudness1)
         self._Loudness1_text_box.set_value(self.Loudness1)
+        self.analog_sig_source_x_0_0.set_amplitude(self.Loudness1)
 
     def get_Loudness(self):
         return self.Loudness
@@ -233,7 +234,6 @@ class top_block(grc_wxgui.top_block_gui):
         self.Loudness = Loudness
         self._Loudness_slider.set_value(self.Loudness)
         self._Loudness_text_box.set_value(self.Loudness)
-        self.analog_sig_source_x_0_0.set_amplitude(self.Loudness)
         self.analog_sig_source_x_0.set_amplitude(self.Loudness)
 
     def get_Frequency1(self):
@@ -241,18 +241,18 @@ class top_block(grc_wxgui.top_block_gui):
 
     def set_Frequency1(self, Frequency1):
         self.Frequency1 = Frequency1
-        self.analog_sig_source_x_0_0.set_frequency(self.Frequency1)
         self._Frequency1_slider.set_value(self.Frequency1)
         self._Frequency1_text_box.set_value(self.Frequency1)
+        self.analog_sig_source_x_0_0.set_frequency(self.Frequency1)
 
     def get_Frequency(self):
         return self.Frequency
 
     def set_Frequency(self, Frequency):
         self.Frequency = Frequency
+        self.analog_sig_source_x_0.set_frequency(self.Frequency)
         self._Frequency_slider.set_value(self.Frequency)
         self._Frequency_text_box.set_value(self.Frequency)
-        self.analog_sig_source_x_0.set_frequency(self.Frequency)
 
 
 def main(top_block_cls=top_block, options=None):

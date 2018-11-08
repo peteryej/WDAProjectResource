@@ -23,6 +23,8 @@ def openSerialPort(serialStr, energy):
         charList[-1] = '3' 
     elif charList[-1] == '3': 
         charList[-1] = '2'
+    elif charList[-1] == '4': 
+        charList[-1] = '3'
     else:
         print('wrong serial port detected')
         return None 
