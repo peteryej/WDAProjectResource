@@ -28,7 +28,7 @@ def openSerialPort(serialStr, energy):
         return None 
 
     targetPort = "".join(charList)
-    target = serial.Serial(port=targetPort, timeout=10000, baudrate=9600)
+    target = serial.Serial(port=targetPort, timeout=10000, baudrate=115200)
     try:
         discard = target.read(12)
     finally:

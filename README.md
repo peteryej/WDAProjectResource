@@ -5,7 +5,7 @@
 ```
   initLEDs();
   while(!SerialUSB);
-  SerialUSB.begin(9600);
+  SerialUSB.begin(115200);
   turnOnLEDs();
   SerialUSB.println("started");
 ```
@@ -13,7 +13,7 @@
 
 `while(!SerialUSB);` waits for openning the serail port which is used to start the energy measurement.
 
-`SerialUSB.begin(9600);` sets up the SerialUSB. 
+`SerialUSB.begin(115200);` sets up the SerialUSB. 
 
 `turnOnLEDs();` gives a visual signal that the program starts. 
 
