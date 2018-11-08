@@ -31,7 +31,7 @@ class PowerDue(threading.Thread):
     """ Defines a thread for reading and buffering serial data.
     By default, about 5MSamples are stored in the buffer.
     Data can be retrieved from the buffer by calling get(N)"""
-    def __init__(self, port, fName='test.csv', chunkSize=63, chunks=10000, debug = False, energy):
+    def __init__(self, port, energy, fName='test.csv', chunkSize=63, chunks=10000, debug = False):
         threading.Thread.__init__(self)
         # circular buffer for storing serial data until it is
         # fetched by the GUI

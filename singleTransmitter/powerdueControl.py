@@ -12,7 +12,7 @@ HOST, PORT = "localhost", 9999
 LOG_FILE = '/home/peter/Desktop/competition_results/competitionLogSingle.txt'
 
 
-def openSerialPort(serialStr, fName, energy):
+def openSerialPort(serialStr, energy):
 
     charList = list(serialStr)
     if (charList[-1] == '1'):
@@ -32,10 +32,7 @@ def openSerialPort(serialStr, fName, energy):
     try:
         discard = target.read(12)
     finally:
-        target.close()
-    s = serial.Serial(port=serialStr, timeout=10000, baudrate=8000000)
-    powerdueThread = PowerDue(s, fName=fName, energy=energy, debug=False)
-    powerdueThread.start()
+        target.close()    
     return powerdueThread
 
 
@@ -65,7 +62,7 @@ if __name__ == "__main__":
     fh.write('\n---------------new round----------------\n')
 
     port1 = raw_input("Enter the first instrumentation port numer (ttyACM...) just a single number: ") # '1'
-    file1 = sys.argv[1] + sys.argv[3] + ".csv"
+    file1 = sys.argv[1] + sys.argv[2] + ".csv"
 
     print(file1)
     fh.write(file1+'\n')
@@ -73,7 +70,14 @@ if __name__ == "__main__":
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.settimeout(30)
 
-    thread1 = openSerialPort('/dev/ttyACM' + str(port1), file1, energy)
+    serialStr = '/dev/ttyACM' + str(port1)
+    # start streaming in another thread
+    s = serial.Serial(port=serialStr, timeout=10000, baudrate=8000000)
+    powerdueThread = PowerDue(s, fName=file1, energy=energy, debug=False)
+    powerdueThread.start()
+
+    # open the target port
+    thread1 = openSerialPort(serialStr, energy)
 
     print('--------start time--------------')
     startTime = datetime.datetime.now()
@@ -81,7 +85,7 @@ if __name__ == "__main__":
     fh.write(startTime.strftime('%Y-%m-%d %H:%M:%S.%f') + '\n\n')
 
     try:
-        # Connect to server and send data
+        # Connect to server and receive data
         sock.connect((HOST, PORT))
         received = sock.recv(512)
         print('--------end time--------------')

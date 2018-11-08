@@ -121,7 +121,7 @@
     </param>
     <param>
       <key>max</key>
-      <value>10000</value>
+      <value>20000</value>
     </param>
     <param>
       <key>min</key>
@@ -176,7 +176,7 @@
     </param>
     <param>
       <key>label</key>
-      <value>Frequency</value>
+      <value>Frequency1</value>
     </param>
     <param>
       <key>max</key>
@@ -294,7 +294,7 @@
     </param>
     <param>
       <key>label</key>
-      <value>Loudness</value>
+      <value>Loudness1</value>
     </param>
     <param>
       <key>max</key>
@@ -401,6 +401,49 @@
     <param>
       <key>value</key>
       <value>44100</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_function_probe</key>
+    <param>
+      <key>block_id</key>
+      <value>my_block_0</value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>function_args</key>
+      <value></value>
+    </param>
+    <param>
+      <key>function_name</key>
+      <value>level</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1024, 392)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>variable_function_probe_0</value>
+    </param>
+    <param>
+      <key>poll_rate</key>
+      <value>10</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -525,7 +568,7 @@
     <key>analog_sig_source_x</key>
     <param>
       <key>amp</key>
-      <value>Loudness1</value>
+      <value>Loudness</value>
     </param>
     <param>
       <key>alias</key>
@@ -582,6 +625,69 @@
     <param>
       <key>waveform</key>
       <value>analog.GR_COS_WAVE</value>
+    </param>
+  </block>
+  <block>
+    <key>analog_sig_source_x</key>
+    <param>
+      <key>amp</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>freq</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(320, 512)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>analog_sig_source_x_0_1</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>offset</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>samp_rate</key>
+      <value>20</value>
+    </param>
+    <param>
+      <key>waveform</key>
+      <value>analog.GR_TRI_WAVE</value>
     </param>
   </block>
   <block>
@@ -726,6 +832,96 @@
     </param>
   </block>
   <block>
+    <key>blocks_probe_signal_x</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(520, 489)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_probe_signal_x_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_throttle</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(536, 540)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_throttle_0</value>
+    </param>
+    <param>
+      <key>ignoretag</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>samples_per_second</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
     <key>wxgui_fftsink2</key>
     <param>
       <key>avg_alpha</key>
@@ -765,7 +961,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(755, 378)</value>
+      <value>(800, 359)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -942,6 +1138,18 @@
     <sink_key>2</sink_key>
   </connection>
   <connection>
+    <source_block_id>analog_sig_source_x_0_1</source_block_id>
+    <sink_block_id>blocks_probe_signal_x_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>analog_sig_source_x_0_1</source_block_id>
+    <sink_block_id>blocks_throttle_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>blocks_add_xx_0</source_block_id>
     <sink_block_id>blocks_complex_to_real_0</sink_block_id>
     <source_key>0</source_key>
@@ -954,14 +1162,14 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_add_xx_0</source_block_id>
-    <sink_block_id>wxgui_waterfallsink2_0</sink_block_id>
+    <source_block_id>blocks_complex_to_real_0</source_block_id>
+    <sink_block_id>audio_sink_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_complex_to_real_0</source_block_id>
-    <sink_block_id>audio_sink_0</sink_block_id>
+    <source_block_id>blocks_throttle_0</source_block_id>
+    <sink_block_id>wxgui_waterfallsink2_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

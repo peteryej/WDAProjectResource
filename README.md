@@ -7,6 +7,7 @@
   while(!SerialUSB);
   SerialUSB.begin(9600);
   turnOnLEDs();
+  SerialUSB.println("started");
 ```
 `initLEDs()` sets up the LED pins and turns them off. 
 
@@ -27,21 +28,31 @@ It's necessary to test your code on the lab laptop because it will be the setup 
 - The audio is run by GNURadio and through the headphone wire, so your code need to make sure that you can get the correct frequencies with this setup. 
 - The tcp server is running on the computer, so make sure your tcp client can connect to the server. 
 
-1. Upload you code to the powerdue board, then connect to the lab laptop.
-2. Go to tcpServer folder and run
+1. On the lab laptop, make sure you are loggined as peter, which is the default if you didn't log out. Then upload you code to the powerdue board, then connect to the lab laptop.
+2. Go to WDAProjectResource folder `cd ~/projects/WDAProjectResource` 
+3. Go to GNURadioGenerate and use gnuradio to generate the audio, keep the volumn as the default and change the frequency values only.
+`cd audioGenerate/GNURadioGenerate`
+
+4. run
 ```
+cd tcpServer
 python2env
 python newtcpServer.py
 ```
-2. Go to singleTansmisster or doubleTransmitter folder depending on whether you are testing on transmitter or two at the same time.
-3. Run 
+4. Go to singleTansmisster or doubleTransmitter folder depending on whether you are testing on transmitter or two at the same time. 
+
+5. Run 
 ```
 python2env
 # if run single transmitter
 python powerdueControl.py team1 try1
-# if run two transmitter2
+# if run two transmitter2. team1 will corresponds to the lower port number board.
 python powerdueControl.py team1 team2 try1
 ```
+
+6. Go to competition_result to check your result. `cd ~/Desktop/competition_result` 
+You should find the csv files corresponds to what you have entered to start the transmitter. You can also open the competitionLogSingle.txt or competitionLogDoubble.txt to see the recorded time and energy results.
+
 
 There are a few ways to transfer your code to the laptop, if you want to edit on the lab laptop.
 1. You can upload the code to google drive then download it on the laptop. 
