@@ -12,7 +12,7 @@ HOST, PORT = "localhost", 9999
 LOG_FILE = '/home/peter/Desktop/competition_results/competitionLogSingle.txt'
 
 
-def openSerialPort(serialStr, energy):
+def openSerialPort(serialStr):
 
     charList = list(serialStr)
     if (charList[-1] == '1'):
@@ -27,15 +27,14 @@ def openSerialPort(serialStr, energy):
         charList[-1] = '3'
     else:
         print('wrong serial port detected')
-        return None 
 
     targetPort = "".join(charList)
     target = serial.Serial(port=targetPort, timeout=10000, baudrate=115200)
     try:
-        discard = target.read(12)
+        discard = target.read(5)
     finally:
         target.close()    
-    return powerdueThread
+
 
 
 def refreshSerialPorts():
@@ -63,7 +62,7 @@ if __name__ == "__main__":
     fh = open(LOG_FILE, "a") 
     fh.write('\n---------------new round----------------\n')
 
-    port1 = raw_input("Enter the first instrumentation port numer (ttyACM...) just a single number: ") # '1'
+    port1 = raw_input("Enter the instrumentation port numer (ttyACM...) just a single number: ") # '1'
     file1 = sys.argv[1] + sys.argv[2] + ".csv"
 
     print(file1)
@@ -74,15 +73,26 @@ if __name__ == "__main__":
 
     serialStr = '/dev/ttyACM' + str(port1)
     # start streaming in another thread
+    #beforeInstruSerial = time.time()
     s = serial.Serial(port=serialStr, timeout=10000, baudrate=8000000)
+    #afterInstruSerial = time.time()
     powerdueThread = PowerDue(s, fName=file1, energy=energy, debug=False)
+    #powerdueObject = time.time()
     powerdueThread.start()
+    #startedInstru = time.time()
 
     # open the target port
-    thread1 = openSerialPort(serialStr, energy)
+    openSerialPort(serialStr)
+    #openedTarget = time.time()
+
+    
+    startTime = datetime.datetime.now()
+    # print('open instrumentation time: {}'.format(afterInstruSerial-beforeInstruSerial))
+    # print('powerdueObject time: {}'.format(powerdueObject - afterInstruSerial))
+    # print('start thread time: {}'.format(startedInstru - afterInstruSerial))
+    # print('open target time: {}'.format(openedTarget - startedInstru))
 
     print('--------start time--------------')
-    startTime = datetime.datetime.now()
     print(startTime)
     fh.write(startTime.strftime('%Y-%m-%d %H:%M:%S.%f') + '\n\n')
 
@@ -104,11 +114,11 @@ if __name__ == "__main__":
     finally:
         sock.close()
 
-    thread1.join()
+    powerdueThread.join()
     fh.write('processor energy: {0:.5f} \n'.format(energy[0]))
     fh.write('radio energy: {0:.5f} \n'.format(energy[1]))
     fh.write('total energy: {0:.5f} \n'.format(energy[2]))
-
+    fh.close()
     print('finished')
 
 

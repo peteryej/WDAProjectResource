@@ -6,8 +6,8 @@
   initLEDs();
   SerialUSB.begin(115200);
   while(!SerialUSB);
-  turnOnLEDs();
   SerialUSB.println("started");
+  turnOnLEDs();
 ```
 `initLEDs()` sets up the LED pins and turns them off. 
 
@@ -46,7 +46,7 @@ python newtcpServer.py
 python2env
 # if run single transmitter
 python powerdueControl.py team1 try1
-# if run two transmitter2. team1 will corresponds to the lower port number board.
+# if run two transmitter2. team1 will corresponds to the first port number you entered.
 python powerdueControl.py team1 team2 try1
 ```
 
