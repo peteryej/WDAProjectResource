@@ -114,12 +114,12 @@ if __name__ == "__main__":
     finally:
         sock.close()
 
-    powerdueThread.join()
-    fh.write('processor energy: {0:.5f} \n'.format(energy[0]))
-    fh.write('radio energy: {0:.5f} \n'.format(energy[1]))
-    fh.write('total energy: {0:.5f} \n'.format(energy[2]))
-    fh.close()
-    print('finished')
+        powerdueThread.join()
+        fh.write('processor energy: {0:.5f} \n'.format(energy[0]))
+        fh.write('radio energy: {0:.5f} \n'.format(energy[1]))
+        fh.write('total energy: {0:.5f} \n'.format(energy[2]))
+        fh.close()
+        print('finished')
 
 
 

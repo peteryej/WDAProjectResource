@@ -152,8 +152,17 @@ if __name__ == "__main__":
         sock.close()
 
 
-    thread2.join()
-    thread1.join()
-    target1.close()    
-    target2.close()
-    print('finished')
+        thread2.join()
+        thread1.join()
+        target1.close()    
+        target2.close()
+        fh.write(file1+' processor energy: {0:.5f} \n'.format(energy1[0]))
+        fh.write(file1+' radio energy: {0:.5f} \n'.format(energy1[1]))
+        fh.write(file1+' total energy: {0:.5f} \n'.format(energy1[2]))
+
+        fh.write(file2+' processor energy: {0:.5f} \n'.format(energy2[0]))
+        fh.write(file2+' radio energy: {0:.5f} \n'.format(energy2[1]))
+        fh.write(file2+' total energy: {0:.5f} \n'.format(energy2[2]))
+        fh.close()
+
+        print('finished')
