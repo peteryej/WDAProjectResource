@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Thu Nov  8 16:04:21 2018
+# Generated: Fri Nov  9 15:46:07 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -206,8 +206,8 @@ class top_block(grc_wxgui.top_block_gui):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
-        self.wxgui_fftsink2_0.set_sample_rate(self.samp_rate)
         self.analog_sig_source_x_0_0.set_sampling_freq(self.samp_rate)
+        self.wxgui_fftsink2_0.set_sample_rate(self.samp_rate)
 
     def get_Noise(self):
         return self.Noise
@@ -250,9 +250,9 @@ class top_block(grc_wxgui.top_block_gui):
 
     def set_Frequency(self, Frequency):
         self.Frequency = Frequency
+        self.analog_sig_source_x_0.set_frequency(self.Frequency)
         self._Frequency_slider.set_value(self.Frequency)
         self._Frequency_text_box.set_value(self.Frequency)
-        self.analog_sig_source_x_0.set_frequency(self.Frequency)
 
 
 def main(top_block_cls=top_block, options=None):
