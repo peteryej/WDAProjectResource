@@ -11,9 +11,11 @@
 ```
 `initLEDs()` sets up the LED pins and turns them off. 
 
+`SerialUSB.begin(115200);` sets up the SerialUSB. 
+
 `while(!SerialUSB);` waits for openning the serail port which is used to start the energy measurement.
 
-`SerialUSB.begin(115200);` sets up the SerialUSB. 
+`SerialUSB.println("started");` the message is read to make sure the target port is open.
 
 `turnOnLEDs();` gives a visual signal that the program starts. 
 
@@ -51,7 +53,7 @@ python powerdueControl.py team1 team2 try1
 ```
 
 6. Go to competition_result to check your result. `cd ~/Desktop/competition_result` 
-You should find the csv files corresponds to what you have entered to start the transmitter. You can also open the competitionLogSingle.txt or competitionLogDoubble.txt to see the recorded time and energy results.
+You should find the csv files corresponds to what you have entered to start the transmitter. You can also open the competitionLogSingle.txt or competitionLogDoubble.txt to see the recorded time and energy results. You can visualize the energy consumption with the script in the powerdueStreamData folder. Just change the file path and file name as necessary. More details are in the readme of powerdueStreamData folder.
 
 
 There are a few ways to transfer your code to the laptop, if you want to edit on the lab laptop.
@@ -70,7 +72,7 @@ Go to your desired folder that you want to put the project directory, then run t
 
 
 ## Get your energy consumption and time
-The processor and LoRa transmission energy is measured during a 25-second interval. The time is measured from when the energy measurement starts to when the tcpServer receives the answer. The instruction on how to test and get the result is in the powerdueStreamData folder.
+The processor and LoRa transmission energy is measured during a 25-second interval. The time is measured from when the energy measurement starts to when the tcpServer receives the answer. 
 
 
 
