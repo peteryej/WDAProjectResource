@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Thu Nov  8 16:04:21 2018
+# Generated: Mon Nov 12 18:22:56 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -43,8 +43,7 @@ class top_block(grc_wxgui.top_block_gui):
         # Variables
         ##################################################
         self.samp_rate = samp_rate = 44100
-        self.Noise = Noise = 0.01
-        self.Loudness1 = Loudness1 = 0.4
+        self.Noise = Noise = 1
         self.Loudness = Loudness = 0.35
         self.Frequency1 = Frequency1 = 5500
         self.Frequency = Frequency = 5000
@@ -52,29 +51,6 @@ class top_block(grc_wxgui.top_block_gui):
         ##################################################
         # Blocks
         ##################################################
-        _Noise_sizer = wx.BoxSizer(wx.VERTICAL)
-        self._Noise_text_box = forms.text_box(
-        	parent=self.GetWin(),
-        	sizer=_Noise_sizer,
-        	value=self.Noise,
-        	callback=self.set_Noise,
-        	label="Noise",
-        	converter=forms.float_converter(),
-        	proportion=0,
-        )
-        self._Noise_slider = forms.slider(
-        	parent=self.GetWin(),
-        	sizer=_Noise_sizer,
-        	value=self.Noise,
-        	callback=self.set_Noise,
-        	minimum=0.0,
-        	maximum=1,
-        	num_steps=1000,
-        	style=wx.SL_HORIZONTAL,
-        	cast=float,
-        	proportion=1,
-        )
-        self.Add(_Noise_sizer)
         _Loudness_sizer = wx.BoxSizer(wx.VERTICAL)
         self._Loudness_text_box = forms.text_box(
         	parent=self.GetWin(),
@@ -160,45 +136,55 @@ class top_block(grc_wxgui.top_block_gui):
         	peak_hold=True,
         )
         self.Add(self.wxgui_fftsink2_0.win)
+        self.blocks_sub_xx_0 = blocks.sub_ff(1)
+        self.blocks_multiply_xx_0 = blocks.multiply_vff(1)
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
+        self.blocks_add_xx_1 = blocks.add_vff(1)
         self.blocks_add_xx_0 = blocks.add_vcc(1)
-        self.audio_sink_0 = audio.sink(samp_rate, "", True)
+        self.audio_sink_0 = audio.sink(44100, "", True)
+        self.analog_sig_source_x_0_2 = analog.sig_source_f(samp_rate, analog.GR_SAW_WAVE, .1, .5, 0)
         self.analog_sig_source_x_0_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, Frequency1, Loudness, 0)
         self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, Frequency, Loudness, 0)
-        self.analog_noise_source_x_0 = analog.noise_source_c(analog.GR_GAUSSIAN, Noise, 0)
-        _Loudness1_sizer = wx.BoxSizer(wx.VERTICAL)
-        self._Loudness1_text_box = forms.text_box(
+        self.analog_noise_source_x_0 = analog.noise_source_f(analog.GR_GAUSSIAN, 1, 0)
+        self.analog_const_source_x_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, .5)
+        _Noise_sizer = wx.BoxSizer(wx.VERTICAL)
+        self._Noise_text_box = forms.text_box(
         	parent=self.GetWin(),
-        	sizer=_Loudness1_sizer,
-        	value=self.Loudness1,
-        	callback=self.set_Loudness1,
-        	label="Loudness1",
+        	sizer=_Noise_sizer,
+        	value=self.Noise,
+        	callback=self.set_Noise,
+        	label="Noise",
         	converter=forms.float_converter(),
         	proportion=0,
         )
-        self._Loudness1_slider = forms.slider(
+        self._Noise_slider = forms.slider(
         	parent=self.GetWin(),
-        	sizer=_Loudness1_sizer,
-        	value=self.Loudness1,
-        	callback=self.set_Loudness1,
+        	sizer=_Noise_sizer,
+        	value=self.Noise,
+        	callback=self.set_Noise,
         	minimum=0.0,
-        	maximum=1.0,
+        	maximum=1,
         	num_steps=1000,
         	style=wx.SL_HORIZONTAL,
         	cast=float,
         	proportion=1,
         )
-        self.Add(_Loudness1_sizer)
+        self.Add(_Noise_sizer)
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.analog_noise_source_x_0, 0), (self.blocks_add_xx_0, 0))    
+        self.connect((self.analog_const_source_x_0, 0), (self.blocks_sub_xx_0, 0))    
+        self.connect((self.analog_noise_source_x_0, 0), (self.blocks_multiply_xx_0, 1))    
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_add_xx_0, 1))    
-        self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_add_xx_0, 2))    
+        self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_add_xx_0, 0))    
+        self.connect((self.analog_sig_source_x_0_2, 0), (self.blocks_sub_xx_0, 1))    
         self.connect((self.blocks_add_xx_0, 0), (self.blocks_complex_to_real_0, 0))    
         self.connect((self.blocks_add_xx_0, 0), (self.wxgui_fftsink2_0, 0))    
-        self.connect((self.blocks_complex_to_real_0, 0), (self.audio_sink_0, 0))    
+        self.connect((self.blocks_add_xx_1, 0), (self.audio_sink_0, 0))    
+        self.connect((self.blocks_complex_to_real_0, 0), (self.blocks_add_xx_1, 1))    
+        self.connect((self.blocks_multiply_xx_0, 0), (self.blocks_add_xx_1, 0))    
+        self.connect((self.blocks_sub_xx_0, 0), (self.blocks_multiply_xx_0, 0))    
 
     def get_samp_rate(self):
         return self.samp_rate
@@ -206,8 +192,9 @@ class top_block(grc_wxgui.top_block_gui):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
-        self.wxgui_fftsink2_0.set_sample_rate(self.samp_rate)
         self.analog_sig_source_x_0_0.set_sampling_freq(self.samp_rate)
+        self.analog_sig_source_x_0_2.set_sampling_freq(self.samp_rate)
+        self.wxgui_fftsink2_0.set_sample_rate(self.samp_rate)
 
     def get_Noise(self):
         return self.Noise
@@ -216,25 +203,16 @@ class top_block(grc_wxgui.top_block_gui):
         self.Noise = Noise
         self._Noise_slider.set_value(self.Noise)
         self._Noise_text_box.set_value(self.Noise)
-        self.analog_noise_source_x_0.set_amplitude(self.Noise)
-
-    def get_Loudness1(self):
-        return self.Loudness1
-
-    def set_Loudness1(self, Loudness1):
-        self.Loudness1 = Loudness1
-        self._Loudness1_slider.set_value(self.Loudness1)
-        self._Loudness1_text_box.set_value(self.Loudness1)
 
     def get_Loudness(self):
         return self.Loudness
 
     def set_Loudness(self, Loudness):
         self.Loudness = Loudness
-        self._Loudness_slider.set_value(self.Loudness)
-        self._Loudness_text_box.set_value(self.Loudness)
         self.analog_sig_source_x_0.set_amplitude(self.Loudness)
         self.analog_sig_source_x_0_0.set_amplitude(self.Loudness)
+        self._Loudness_slider.set_value(self.Loudness)
+        self._Loudness_text_box.set_value(self.Loudness)
 
     def get_Frequency1(self):
         return self.Frequency1
