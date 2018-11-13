@@ -213,8 +213,8 @@ class PowerDue(threading.Thread):
         ProcessorCol = output[:,4]
         RadioCol = output[:,3]
         ProcessorTotal = np.sum(ProcessorCol[np.where(ProcessorCol>.1)])
-        #RadioTotal = np.sum(RadioCol[np.where(RadioCol>.1)])
-        RadioTotal = np.sum(RadioCol)
+        RadioTotal = np.sum(RadioCol[np.where(RadioCol>.1)])
+        #RadioTotal = np.sum(RadioCol)
 
         # Processorenergy = totalRaw[4]*3.3/25/1.33*delta   
         # print("Processor total energy: {0:.5f} J".format(Processorenergy))
