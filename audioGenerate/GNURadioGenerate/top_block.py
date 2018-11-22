@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Mon Nov 12 18:22:56 2018
+# Generated: Thu Nov 22 14:16:20 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -44,7 +44,7 @@ class top_block(grc_wxgui.top_block_gui):
         ##################################################
         self.samp_rate = samp_rate = 44100
         self.Noise = Noise = 1
-        self.Loudness = Loudness = 0.35
+        self.Loudness = Loudness = 0.2
         self.Frequency1 = Frequency1 = 5500
         self.Frequency = Frequency = 5000
 
@@ -120,7 +120,7 @@ class top_block(grc_wxgui.top_block_gui):
         	proportion=1,
         )
         self.Add(_Frequency_sizer)
-        self.wxgui_fftsink2_0 = fftsink2.fft_sink_c(
+        self.wxgui_fftsink2_0 = fftsink2.fft_sink_f(
         	self.GetWin(),
         	baseband_freq=0,
         	y_per_div=10,
@@ -180,8 +180,8 @@ class top_block(grc_wxgui.top_block_gui):
         self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_add_xx_0, 0))    
         self.connect((self.analog_sig_source_x_0_2, 0), (self.blocks_sub_xx_0, 1))    
         self.connect((self.blocks_add_xx_0, 0), (self.blocks_complex_to_real_0, 0))    
-        self.connect((self.blocks_add_xx_0, 0), (self.wxgui_fftsink2_0, 0))    
         self.connect((self.blocks_add_xx_1, 0), (self.audio_sink_0, 0))    
+        self.connect((self.blocks_add_xx_1, 0), (self.wxgui_fftsink2_0, 0))    
         self.connect((self.blocks_complex_to_real_0, 0), (self.blocks_add_xx_1, 1))    
         self.connect((self.blocks_multiply_xx_0, 0), (self.blocks_add_xx_1, 0))    
         self.connect((self.blocks_sub_xx_0, 0), (self.blocks_multiply_xx_0, 0))    
@@ -209,10 +209,10 @@ class top_block(grc_wxgui.top_block_gui):
 
     def set_Loudness(self, Loudness):
         self.Loudness = Loudness
-        self.analog_sig_source_x_0.set_amplitude(self.Loudness)
-        self.analog_sig_source_x_0_0.set_amplitude(self.Loudness)
         self._Loudness_slider.set_value(self.Loudness)
         self._Loudness_text_box.set_value(self.Loudness)
+        self.analog_sig_source_x_0.set_amplitude(self.Loudness)
+        self.analog_sig_source_x_0_0.set_amplitude(self.Loudness)
 
     def get_Frequency1(self):
         return self.Frequency1
