@@ -2,17 +2,16 @@
 #include <LoRa.h>
 
 // fixed parameters
-#define FREQUENCY         915E6   // 915MHz
+#define FREQUENCY         920E6   // 915MHz
 #define BANDWIDTH         125000  // 125kHz bandwidth
 #define SLEEPTIME         4000    // 4 seconds
 
 // vary these parameters
 #define TX_POWER          20   // valid values are from 6 to 20
 #define SPREADING_FACTOR  7    // valid values are 7, 8, 9 or 10
-#define ANSWER            "600 700"
+#define ANSWER            "testTeam 6000 7500"
 
 int counter = 0;
-const uint8_t answer[20] = "hello\n";
 
 void setup() {
   pd_rgb_led_init();
@@ -37,18 +36,18 @@ void setup() {
 void loop() {
   SerialUSB.print("Sending packet: ");
   SerialUSB.print(ANSWER);
+  SerialUSB.print("  ");
   SerialUSB.println(counter);
 
   // send packet
   LoRa.beginPacket();
-  LoRa.write(answer, 20);
   LoRa.print(ANSWER);
   //LoRa.print(counter);
   LoRa.endPacket();
 
   counter++;
 
-  if(counter > 10) {
+  if(counter > 20) {
     delay(500);
     counter = 0;
   }

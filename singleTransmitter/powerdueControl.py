@@ -16,9 +16,9 @@ def openSerialPort(serialStr):
 
     charList = list(serialStr)
     if (charList[-1] == '1'):
-        charList[-1] = '0' 
+        charList[-1] = '3' 
     elif charList[-1] == '0': 
-        charList[-1] = '1' 
+        charList[-1] = '3' 
     elif charList[-1] == '2': 
         charList[-1] = '3' 
     elif charList[-1] == '3': 

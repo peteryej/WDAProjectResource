@@ -99,7 +99,7 @@ void loop()
   SerialUSB.println(elapsedTime);
 
   //while(1); /* Run Once */
-  delay(2000); /* Repeat after delay */
+  //delay(2000); /* Repeat after delay */
 
 }
 

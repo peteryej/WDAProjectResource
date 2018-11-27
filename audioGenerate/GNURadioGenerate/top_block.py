@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Thu Nov 22 14:16:20 2018
+# Generated: Mon Nov 26 19:01:44 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -43,7 +43,6 @@ class top_block(grc_wxgui.top_block_gui):
         # Variables
         ##################################################
         self.samp_rate = samp_rate = 44100
-        self.Noise = Noise = 1
         self.Loudness = Loudness = 0.2
         self.Frequency1 = Frequency1 = 5500
         self.Frequency = Frequency = 5000
@@ -147,29 +146,6 @@ class top_block(grc_wxgui.top_block_gui):
         self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, Frequency, Loudness, 0)
         self.analog_noise_source_x_0 = analog.noise_source_f(analog.GR_GAUSSIAN, 1, 0)
         self.analog_const_source_x_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, .5)
-        _Noise_sizer = wx.BoxSizer(wx.VERTICAL)
-        self._Noise_text_box = forms.text_box(
-        	parent=self.GetWin(),
-        	sizer=_Noise_sizer,
-        	value=self.Noise,
-        	callback=self.set_Noise,
-        	label="Noise",
-        	converter=forms.float_converter(),
-        	proportion=0,
-        )
-        self._Noise_slider = forms.slider(
-        	parent=self.GetWin(),
-        	sizer=_Noise_sizer,
-        	value=self.Noise,
-        	callback=self.set_Noise,
-        	minimum=0.0,
-        	maximum=1,
-        	num_steps=1000,
-        	style=wx.SL_HORIZONTAL,
-        	cast=float,
-        	proportion=1,
-        )
-        self.Add(_Noise_sizer)
 
         ##################################################
         # Connections
@@ -195,14 +171,6 @@ class top_block(grc_wxgui.top_block_gui):
         self.analog_sig_source_x_0_0.set_sampling_freq(self.samp_rate)
         self.analog_sig_source_x_0_2.set_sampling_freq(self.samp_rate)
         self.wxgui_fftsink2_0.set_sample_rate(self.samp_rate)
-
-    def get_Noise(self):
-        return self.Noise
-
-    def set_Noise(self, Noise):
-        self.Noise = Noise
-        self._Noise_slider.set_value(self.Noise)
-        self._Noise_text_box.set_value(self.Noise)
 
     def get_Loudness(self):
         return self.Loudness
