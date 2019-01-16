@@ -7,7 +7,10 @@ arduinoFFT FFT = arduinoFFT(); /* Create FFT object */
 These values can be changed in order to evaluate the functions
 */
 const uint16_t SAMPLES = OUT_BUFF; //This value MUST NOT be modified, ALWAYS be a power of 2
+// To be modified: the sampling rate is actually 44.1 KHz, because it's receiving from due channels, 
+// so there are repeated values. The raw value needs to be pre-processed to get rid of the repeated value.
 const double SAMP_FREC = 88200.0; //This value MUST NOT be modified
+
 
 /*
 These are the input and output vectors
